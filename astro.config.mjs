@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://rimba-maker.github.io',
-  base: '/playfield-sport-center',
+  base: process.env.GITHUB_ACTIONS ? '/playfield-sport-center' : '/',
   integrations: [react()],
   vite: {
     plugins: [tailwindcss()],
