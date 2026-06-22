@@ -100,7 +100,7 @@ export default function Membership() {
         </motion.div>
 
         {/* Cards */}
-        <div className="flex overflow-x-auto gap-4 pt-5 pb-4 snap-x snap-mandatory md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:pt-0 md:pb-0 md:items-center">
+        <div className="flex overflow-x-auto gap-4 pt-5 pb-4 snap-x snap-mandatory md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:pt-0 md:pb-0">
           {plans.map((plan, i) => (
             <motion.div
               key={plan.id}
