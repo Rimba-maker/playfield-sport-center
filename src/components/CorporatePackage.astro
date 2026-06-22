@@ -1,0 +1,135 @@
+---
+const WA_NUMBER = '6281234567890';
+
+const packages = [
+  {
+    icon: '🏆',
+    title: 'Corporate Tournament',
+    highlight: 'Mulai Rp 2.5 jt untuk 20 orang',
+    features: [
+      'Turnamen internal antar divisi',
+      'Custom bracket & scoring',
+      'Trophy + sertifikat untuk pemenang',
+      'F&B package (optional)',
+      'MC & dokumentasi (optional)',
+    ],
+    waMsg: 'Halo, saya ingin info Corporate Tournament untuk tim kantor kami.',
+  },
+  {
+    icon: '👥',
+    title: 'Team Building Olahraga',
+    highlight: 'Mulai Rp 1.5 jt untuk 20 orang',
+    features: [
+      'Gabungan sport: futsal + badminton + padel',
+      'Format round-robin antar departemen',
+      'Dipandu sports coordinator kami',
+      'Fun & competitive sekaligus',
+    ],
+    waMsg: 'Halo, saya ingin info Team Building Olahraga untuk perusahaan kami.',
+  },
+  {
+    icon: '📋',
+    title: 'Regular Corporate Slot',
+    highlight: 'Diskon 15% untuk min. 4x/bulan',
+    features: [
+      'Slot lapangan khusus untuk perusahaan',
+      'Booking flexible, invoice & kwitansi',
+      'Cocok untuk reimburse wellbeing benefit',
+      'Jadwal rutin yang bisa disesuaikan',
+    ],
+    waMsg: 'Halo, saya ingin info Regular Corporate Slot untuk perusahaan kami.',
+  },
+];
+---
+
+<section
+  id="corporate"
+  class="section-padding"
+  style="background: #121212;"
+>
+  <div class="container-main">
+    <!-- Heading -->
+    <div class="text-center mb-12">
+      <h2
+        class="font-display text-4xl md:text-6xl text-white mb-3"
+        style="font-family: var(--font-display); letter-spacing: 0.02em;"
+      >
+        OLAHRAGA BARENG TIM KANTOR.
+        <br />
+        <span style="color: #b3b3b3;">KAMI YANG SIAPKAN.</span>
+      </h2>
+      <p style="color: #707072; font-family: var(--font-sans);">
+        Dari booking lapangan biasa sampai full corporate tournament dengan trophy dan sertifikat.
+      </p>
+    </div>
+
+    <!-- Package cards -->
+    <div class="grid md:grid-cols-3 gap-6">
+      {packages.map((pkg) => (
+        <div
+          class="rounded-2xl p-8 flex flex-col gap-5 transition-all duration-200 hover:-translate-y-1"
+          style="background: #181818; border: 1px solid #2a2a2a;"
+        >
+          <div>
+            <span class="text-3xl">{pkg.icon}</span>
+            <h3
+              class="font-bold text-lg text-white mt-3"
+              style="font-family: var(--font-sans);"
+            >
+              {pkg.title}
+            </h3>
+            <span
+              class="inline-block mt-2 text-xs font-bold px-3 py-1 rounded-full"
+              style="background: rgba(249,115,22,0.15); color: #f97316;"
+            >
+              {pkg.highlight}
+            </span>
+          </div>
+
+          <ul class="flex flex-col gap-2 flex-1">
+            {pkg.features.map((f) => (
+              <li class="flex items-start gap-2 text-sm" style="color: #b3b3b3;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:3px"><polyline points="20 6 9 17 4 12"/></svg>
+                {f}
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(pkg.waMsg)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full font-bold text-sm uppercase tracking-wider transition-all hover:scale-105 active:scale-95"
+            style="background: transparent; color: #f97316; border: 1px solid #f97316; font-family: var(--font-sans);"
+          >
+            Tanya Detail →
+          </a>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom CTA strip -->
+    <div
+      class="mt-8 rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4"
+      style="background: #181818; border: 1px solid #2a2a2a;"
+    >
+      <div>
+        <p class="font-bold text-white" style="font-family: var(--font-sans);">
+          Butuh penawaran custom?
+        </p>
+        <p class="text-sm" style="color: #707072;">
+          Tim kami siap diskusikan kebutuhan event kantor kamu dari awal.
+        </p>
+      </div>
+      <a
+        href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Halo, saya ingin diskusi paket corporate custom untuk perusahaan kami.')}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex-shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm uppercase tracking-wider transition-all hover:scale-105"
+        style="background: #ffffff; color: #111111; font-family: var(--font-sans);"
+      >
+        WhatsApp Kami Sekarang
+      </a>
+    </div>
+  </div>
+</section>

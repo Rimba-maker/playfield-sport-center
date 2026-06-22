@@ -1,0 +1,175 @@
+---
+const WA_NUMBER = '6281234567890';
+const WA_MSG = encodeURIComponent('Halo, saya ingin book lapangan di PlayField Sport Center.');
+
+const navGroups = [
+  {
+    title: 'Lapangan',
+    links: [
+      { label: 'Futsal', href: '#lapangan' },
+      { label: 'Badminton', href: '#lapangan' },
+      { label: 'Padel', href: '#padel' },
+      { label: 'Tenis', href: '#lapangan' },
+    ],
+  },
+  {
+    title: 'Program',
+    links: [
+      { label: 'Membership', href: '#member' },
+      { label: 'Tournament & Events', href: '#tournament' },
+      { label: 'Corporate Package', href: '#corporate' },
+      { label: 'Intro Session Padel', href: '#padel' },
+    ],
+  },
+  {
+    title: 'Info',
+    links: [
+      { label: 'Harga', href: '#harga' },
+      { label: 'Fasilitas', href: '#fasilitas' },
+      { label: 'FAQ', href: '#faq' },
+      { label: 'Lokasi', href: '#lokasi' },
+    ],
+  },
+];
+
+const socials = [
+  {
+    label: 'Instagram',
+    href: '#',
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>`,
+  },
+  {
+    label: 'TikTok',
+    href: '#',
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>`,
+  },
+  {
+    label: 'WhatsApp',
+    href: `https://wa.me/${WA_NUMBER}`,
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9 10a0.5 0.5 0 0 0 1 0V9a0.5 0.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a0.5 0.5 0 0 0 0-1h-1a0.5 0.5 0 0 0 0 1"/></svg>`,
+  },
+];
+---
+
+<footer
+  id="lokasi"
+  style="background: #0a0a0a; border-top: 1px solid #2a2a2a;"
+>
+  <!-- Main footer -->
+  <div class="container-main py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+
+      <!-- Brand column -->
+      <div class="lg:col-span-2">
+        <a href="/" class="flex items-center gap-2 mb-4">
+          <div
+            class="w-8 h-8 rounded-lg flex items-center justify-center font-display text-lg font-bold"
+            style="background: #f97316; color: #fff;"
+          >
+            P
+          </div>
+          <span class="font-display text-xl tracking-wide text-white" style="font-family: var(--font-display);">
+            PLAY<span style="color: #f97316;">FIELD</span>
+          </span>
+        </a>
+        <p class="text-sm leading-relaxed mb-6" style="color: #707072; font-family: var(--font-sans); max-width: 280px;">
+          Satu Venue. Semua Olahraga. Langsung Main.
+          <br/><br/>
+          12 lapangan futsal, badminton, padel & tenis. Buka setiap hari 06.00–23.00.
+        </p>
+
+        <!-- Contact info -->
+        <div class="flex flex-col gap-2 mb-6">
+          <div class="flex items-center gap-2 text-sm" style="color: #b3b3b3;">
+            <span>📍</span>
+            <span>Jl. Olahraga No. 1, Jakarta Selatan</span>
+          </div>
+          <div class="flex items-center gap-2 text-sm" style="color: #b3b3b3;">
+            <span>🕐</span>
+            <span>Setiap Hari 06.00 – 23.00</span>
+          </div>
+          <a
+            href={`https://wa.me/${WA_NUMBER}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-2 text-sm transition-colors hover:text-white"
+            style="color: #22c55e;"
+          >
+            <span>💬</span>
+            <span>+62 812-3456-7890</span>
+          </a>
+        </div>
+
+        <!-- Socials -->
+        <div class="flex gap-3">
+          {socials.map((s) => (
+            <a
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={s.label}
+              class="w-9 h-9 rounded-full flex items-center justify-center transition-all hover:scale-110 hover:text-white"
+              style="background: #1f1f1f; border: 1px solid #2a2a2a; color: #b3b3b3;"
+              set:html={s.svg}
+            />
+          ))}
+        </div>
+      </div>
+
+      <!-- Nav groups -->
+      {navGroups.map((group) => (
+        <div>
+          <p
+            class="text-xs font-bold uppercase tracking-widest mb-4"
+            style="color: #707072; font-family: var(--font-sans);"
+          >
+            {group.title}
+          </p>
+          <ul class="flex flex-col gap-3">
+            {group.links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-sm transition-colors hover:text-white"
+                  style="color: #b3b3b3; font-family: var(--font-sans);"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Book CTA strip -->
+  <div style="border-top: 1px solid #2a2a2a; background: #0d0d0d;">
+    <div class="container-main py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-sm" style="color: #707072;">
+        Booking cuma 2 menit. Konfirmasi langsung ke WhatsApp.
+      </p>
+      <a
+        href={`https://wa.me/${WA_NUMBER}?text=${WA_MSG}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full font-bold text-sm uppercase tracking-wider transition-all hover:scale-105"
+        style="background: #ffffff; color: #111111; font-family: var(--font-sans);"
+      >
+        Book Lapangan via WA →
+      </a>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div style="border-top: 1px solid #1a1a1a;">
+    <div class="container-main py-4 flex flex-col md:flex-row items-center justify-between gap-2">
+      <p class="text-xs" style="color: #3a3a3a; font-family: var(--font-sans);">
+        © 2025 PlayField Sport Center. All rights reserved.
+      </p>
+      <p class="text-xs" style="color: #3a3a3a; font-family: var(--font-sans);">
+        Futsal · Badminton · Padel · Tenis
+      </p>
+    </div>
+  </div>
+</footer>

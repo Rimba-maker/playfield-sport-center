@@ -1,0 +1,256 @@
+---
+const WA_NUMBER = '6281234567890';
+const WA_MSG = encodeURIComponent('Halo, saya ingin tanya info harga dan booking lapangan.');
+
+// Inline SVGs from Tabler (static Astro — no React island needed)
+const svgFootball = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3c0 0-3 3.5-3 9s3 9 3 9"/><path d="M3 12h18"/><path d="M6.5 6.5l11 0"/><path d="M6.5 17.5l11 0"/></svg>`;
+const svgBadminton = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l7-4 8-8-4-4-8 8-4 7z"/><path d="M14 6l4 4"/><path d="M10 3a4 4 0 0 1 4 4l1-1a4 4 0 0 0-4-4l-1 1z"/></svg>`;
+const svgTennis = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M6 5.3a9 9 0 0 1 0 13.4"/><path d="M18 5.3a9 9 0 0 0 0 13.4"/></svg>`;
+
+const sportIcons: Record<string, string> = {
+  futsal: svgFootball,
+  badminton: svgBadminton,
+  padel: svgTennis,
+  tenis: svgTennis,
+};
+
+const sports = [
+  {
+    id: 'futsal',
+    label: 'Futsal',
+    color: '#22c55e',
+    unit: 'per lapangan / jam',
+    rows: [
+      { slot: 'Pagi', time: '06.00 – 10.00', weekday: 'Rp 120k', weekend: 'Rp 150k' },
+      { slot: 'Siang', time: '10.00 – 17.00', weekday: 'Rp 150k', weekend: 'Rp 175k' },
+      { slot: 'Sore', time: '17.00 – 21.00', weekday: 'Rp 200k', weekend: 'Rp 225k', peak: true },
+      { slot: 'Malam', time: '21.00 – 23.00', weekday: 'Rp 175k', weekend: 'Rp 200k' },
+    ],
+  },
+  {
+    id: 'badminton',
+    label: 'Badminton',
+    color: '#3b82f6',
+    unit: 'per lapangan / jam',
+    rows: [
+      { slot: 'Pagi', time: '06.00 – 10.00', weekday: 'Rp 45k', weekend: 'Rp 55k' },
+      { slot: 'Siang', time: '10.00 – 17.00', weekday: 'Rp 55k', weekend: 'Rp 65k' },
+      { slot: 'Sore', time: '17.00 – 21.00', weekday: 'Rp 75k', weekend: 'Rp 85k', peak: true },
+      { slot: 'Malam', time: '21.00 – 23.00', weekday: 'Rp 65k', weekend: 'Rp 75k' },
+    ],
+  },
+  {
+    id: 'padel',
+    label: 'Padel',
+    color: '#f97316',
+    unit: 'per lapangan / jam',
+    rows: [
+      { slot: 'Pagi', time: '06.00 – 10.00', weekday: 'Rp 130k', weekend: 'Rp 160k' },
+      { slot: 'Siang', time: '10.00 – 17.00', weekday: 'Rp 150k', weekend: 'Rp 180k' },
+      { slot: 'Sore', time: '17.00 – 21.00', weekday: 'Rp 200k', weekend: 'Rp 230k', peak: true },
+      { slot: 'Malam', time: '21.00 – 23.00', weekday: 'Rp 175k', weekend: 'Rp 200k' },
+    ],
+  },
+  {
+    id: 'tenis',
+    label: 'Tenis',
+    color: '#a855f7',
+    unit: 'per lapangan / jam',
+    rows: [
+      { slot: 'Pagi', time: '06.00 – 10.00', weekday: 'Rp 110k', weekend: 'Rp 130k' },
+      { slot: 'Siang', time: '10.00 – 17.00', weekday: 'Rp 130k', weekend: 'Rp 150k' },
+      { slot: 'Sore', time: '17.00 – 21.00', weekday: 'Rp 160k', weekend: 'Rp 180k', peak: true },
+      { slot: 'Malam', time: '21.00 – 22.00', weekday: 'Rp 140k', weekend: 'Rp 160k' },
+    ],
+  },
+];
+
+const paymentMethods = ['Transfer Bank', 'QRIS', 'GoPay', 'OVO', 'Kartu Debit/Kredit'];
+---
+
+<section id="harga" class="section-padding" style="background: #0d0d0d;">
+  <div class="container-main">
+    <!-- Heading -->
+    <div class="text-center mb-12">
+      <h2
+        class="font-display text-4xl md:text-6xl text-white mb-3"
+        style="font-family: var(--font-display); letter-spacing: 0.02em;"
+      >
+        HARGA JELAS.
+        <br />
+        <span style="color: #b3b3b3;">LANGSUNG BOOKING.</span>
+      </h2>
+      <p style="color: #707072; font-family: var(--font-sans);">
+        Semua harga per jam per lapangan. Tidak ada biaya tersembunyi.
+      </p>
+    </div>
+
+    <!-- Tab buttons (JS-driven) -->
+    <div class="flex gap-2 md:gap-3 mb-8 justify-center flex-wrap" id="pricing-tabs">
+      {sports.map((s, i) => (
+        <button
+          data-tab={s.id}
+          class={`pricing-tab flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200`}
+          style={`
+            font-family: var(--font-sans);
+            background: ${i === 0 ? s.color : '#181818'};
+            color: ${i === 0 ? (s.id === 'futsal' ? '#111' : '#fff') : '#b3b3b3'};
+            border: 1px solid ${i === 0 ? s.color : '#2a2a2a'};
+          `}
+        >
+          <span set:html={sportIcons[s.id]} /> {s.label}
+        </button>
+      ))}
+    </div>
+
+    <!-- Tables -->
+    {sports.map((s, i) => (
+      <div
+        id={`pricing-${s.id}`}
+        class="pricing-panel rounded-2xl overflow-hidden"
+        style={`background: #181818; border: 1px solid #2a2a2a; display: ${i === 0 ? 'block' : 'none'};`}
+      >
+        <div
+          class="px-6 py-4 flex items-center gap-3"
+          style={`border-bottom: 1px solid #2a2a2a; background: rgba(0,0,0,0.2);`}
+        >
+          <span set:html={sportIcons[s.id]} />
+          <span
+            class="font-bold text-white"
+            style="font-family: var(--font-sans);"
+          >{s.label}</span>
+          <span
+            class="text-xs px-2 py-0.5 rounded-full ml-auto"
+            style={`background: rgba(${s.id === 'futsal' ? '34,197,94' : s.id === 'badminton' ? '59,130,246' : s.id === 'padel' ? '249,115,22' : '168,85,247'}, 0.15); color: ${s.color};`}
+          >
+            {s.unit}
+          </span>
+        </div>
+        <table class="w-full text-sm" style="font-family: var(--font-sans);">
+          <thead>
+            <tr style="border-bottom: 1px solid #2a2a2a;">
+              <th class="text-left px-6 py-3 font-semibold" style="color: #707072;">Slot</th>
+              <th class="text-left px-4 py-3 font-semibold" style="color: #707072;">Jam</th>
+              <th class="text-right px-4 py-3 font-semibold" style="color: #707072;">Weekday</th>
+              <th class="text-right px-6 py-3 font-semibold" style="color: #707072;">Weekend</th>
+            </tr>
+          </thead>
+          <tbody>
+            {s.rows.map((row) => (
+              <tr
+                class="transition-colors"
+                style={`
+                  border-bottom: 1px solid #2a2a2a;
+                  background: ${row.peak ? `rgba(${s.id === 'futsal' ? '34,197,94' : s.id === 'badminton' ? '59,130,246' : s.id === 'padel' ? '249,115,22' : '168,85,247'}, 0.06)` : 'transparent'};
+                `}
+              >
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-2">
+                    <span class="font-semibold text-white">{row.slot}</span>
+                    {row.peak && (
+                      <span
+                        class="text-xs px-2 py-0.5 rounded-full font-bold"
+                        style={`background: ${s.color}; color: ${s.id === 'futsal' ? '#111' : '#fff'};`}
+                      >
+                        Peak
+                      </span>
+                    )}
+                  </div>
+                </td>
+                <td class="px-4 py-4" style="color: #b3b3b3;">{row.time}</td>
+                <td class="text-right px-4 py-4 font-semibold text-white">{row.weekday}</td>
+                <td class="text-right px-6 py-4 font-semibold" style={`color: ${s.color};`}>{row.weekend}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    ))}
+
+    <!-- Info footer -->
+    <div class="grid md:grid-cols-2 gap-4 mt-6">
+      <div
+        class="rounded-xl p-5"
+        style="background: #181818; border: 1px solid #2a2a2a;"
+      >
+        <p class="text-xs font-bold uppercase tracking-widest mb-3" style="color: #707072;">
+          Kebijakan Refund
+        </p>
+        <ul class="flex flex-col gap-1.5">
+          {[
+            { label: 'Cancel H-24', value: 'Refund 100%', color: '#22c55e' },
+            { label: 'Cancel H-12', value: 'Refund 50%', color: '#f97316' },
+            { label: 'Under 12 jam', value: 'No refund', color: '#ef4444' },
+            { label: 'Reschedule H-24', value: 'Gratis', color: '#22c55e' },
+          ].map((item) => (
+            <li class="flex items-center justify-between text-sm">
+              <span style="color: #b3b3b3;">{item.label}</span>
+              <span class="font-semibold" style={`color: ${item.color};`}>{item.value}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div
+        class="rounded-xl p-5"
+        style="background: #181818; border: 1px solid #2a2a2a;"
+      >
+        <p class="text-xs font-bold uppercase tracking-widest mb-3" style="color: #707072;">
+          Metode Pembayaran
+        </p>
+        <div class="flex flex-wrap gap-2">
+          {paymentMethods.map((m) => (
+            <span
+              class="px-3 py-1 rounded-full text-xs font-semibold"
+              style="background: #1f1f1f; color: #b3b3b3; border: 1px solid #2a2a2a;"
+            >
+              {m}
+            </span>
+          ))}
+        </div>
+        <div class="mt-4 pt-4" style="border-top: 1px solid #2a2a2a;">
+          <a
+            href={`https://wa.me/${WA_NUMBER}?text=${WA_MSG}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm uppercase tracking-wider transition-all hover:scale-105"
+            style="background: #ffffff; color: #111111; font-family: var(--font-sans);"
+          >
+            Book Sekarang →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.pricing-tab');
+  const panels = document.querySelectorAll<HTMLDivElement>('.pricing-panel');
+
+  const colors: Record<string, string> = {
+    futsal: '#22c55e',
+    badminton: '#3b82f6',
+    padel: '#f97316',
+    tenis: '#a855f7',
+  };
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const id = tab.dataset['tab']!;
+      const color = colors[id]!;
+
+      tabs.forEach((t) => {
+        t.style.background = '#181818';
+        t.style.color = '#b3b3b3';
+        t.style.borderColor = '#2a2a2a';
+      });
+      tab.style.background = color;
+      tab.style.color = id === 'futsal' ? '#111' : '#fff';
+      tab.style.borderColor = color;
+
+      panels.forEach((p) => { p.style.display = 'none'; });
+      const panel = document.getElementById(`pricing-${id}`);
+      if (panel) panel.style.display = 'block';
+    });
+  });
+</script>
