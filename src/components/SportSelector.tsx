@@ -202,7 +202,7 @@ export default function SportSelector() {
                 />
                 <div className="absolute top-4 left-4">
                   <span
-                    className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider"
                     style={{
                       background: sport.color,
                       color: sport.id === 'futsal' ? '#111' : '#fff',

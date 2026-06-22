@@ -111,12 +111,24 @@ export default function PadelSpotlight() {
             <span style={{ color: '#f97316' }}>SUDAH WAKTUNYA COBA.</span>
           </h2>
           <p className="max-w-2xl mx-auto text-base md:text-lg" style={{ color: '#b3b3b3' }}>
-            Olahraga dengan pertumbuhan tercepat di Indonesia 2025. Naik{' '}
-            <strong style={{ color: '#f97316' }}>
-              <Counter to={1684} suffix="%" />
-            </strong>{' '}
-            dalam setahun. Bukan sekadar tren — ini olahraga yang akan bertahan lama.
+            Olahraga dengan pertumbuhan tercepat di Indonesia 2025. Bukan sekadar tren — ini olahraga yang akan bertahan lama.
           </p>
+          <div className="flex items-center justify-center gap-3 mt-4">
+            <span
+              className="font-display"
+              style={{
+                fontSize: 'clamp(48px, 8vw, 80px)',
+                color: '#f97316',
+                fontFamily: 'var(--font-display)',
+                lineHeight: 1,
+              }}
+            >
+              <Counter to={1684} suffix="%" />
+            </span>
+            <span className="text-left text-sm max-w-[120px] leading-snug" style={{ color: '#b3b3b3' }}>
+              pertumbuhan<br />dalam setahun
+            </span>
+          </div>
         </motion.div>
 
         {/* Reason cards */}
@@ -156,7 +168,7 @@ export default function PadelSpotlight() {
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="rounded-2xl p-8 relative overflow-hidden"
+            className="rounded-2xl p-8 relative overflow-hidden flex flex-col"
             style={{
               background: 'linear-gradient(135deg, rgba(249,115,22,0.15), rgba(249,115,22,0.05))',
               border: '1px solid rgba(249,115,22,0.3)',
@@ -190,7 +202,7 @@ export default function PadelSpotlight() {
               href={WA_INTRO}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm uppercase tracking-wider transition-all hover:scale-105 active:scale-95"
+              className="mt-auto flex items-center justify-center gap-2 w-full px-6 py-3 rounded-full font-bold text-sm uppercase tracking-wider transition-all hover:scale-105 active:scale-95"
               style={{ background: '#f97316', color: '#fff', fontFamily: 'var(--font-sans)' }}
             >
               Daftar via WA — Slot Terbatas
@@ -202,7 +214,7 @@ export default function PadelSpotlight() {
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="rounded-2xl p-8"
+            className="rounded-2xl p-8 flex flex-col"
             style={{ background: '#181818', border: '1px solid #2a2a2a' }}
           >
             <h3
@@ -230,7 +242,7 @@ export default function PadelSpotlight() {
               href={WA_COMMUNITY}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm uppercase tracking-wider transition-all hover:scale-105 active:scale-95"
+              className="mt-auto flex items-center justify-center gap-2 w-full px-6 py-3 rounded-full font-bold text-sm uppercase tracking-wider transition-all hover:scale-105 active:scale-95"
               style={{
                 background: 'transparent',
                 color: '#f97316',

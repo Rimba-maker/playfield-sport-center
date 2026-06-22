@@ -51,12 +51,21 @@ const reviews: Array<{
   },
   {
     id: 5,
-    text: 'Badminton court-nya paling enak di kota ini. Vinyl floor-nya empuk di kaki, shuttlecock yang dijual juga bagus. Member Pro-nya worth it banget.',
+    text: 'Badminton court-nya paling enak di kota ini. Vinyl floor-nya empuk di kaki, nggak pegal walau main 2 jam penuh. Shuttlecock yang dijual di counter juga bagus dan harga wajar. Sudah coba beberapa venue lain di kota ini — PlayField tetap yang terbaik soal kualitas court dan kebersihan.',
     author: 'Pak Doni',
     meta: 'Badminton 4x seminggu · Pro member',
     sport: 'badminton',
     color: '#3b82f6',
     Avatar: IconPingPong,
+  },
+  {
+    id: 6,
+    text: 'Awalnya ragu coba padel karena takut susah, tapi ikut intro session Sabtu pagi langsung ketagihan. Coach-nya sabar banget ngajarin dari nol. Sekarang sudah main 3x seminggu sama keluarga — suami, saya, dan anak remaja kami semua ikut. Ini olahraga keluarga terbaik yang pernah kami coba.',
+    author: 'Ibu Sari',
+    meta: 'Elite member · Padel & Tenis',
+    sport: 'padel',
+    color: '#a855f7',
+    Avatar: IconBallTennis,
   },
 ];
 
@@ -90,14 +99,14 @@ export default function Testimonial() {
         </motion.div>
 
         {/* Reviews masonry-like grid */}
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {reviews.map((r, i) => (
             <motion.div
               key={r.id}
               initial={{ opacity: 0, y: 24 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="break-inside-avoid rounded-2xl p-6 flex flex-col gap-4"
+              className="rounded-2xl p-6 flex flex-col gap-4"
               style={{
                 background: '#181818',
                 border: '1px solid #2a2a2a',
@@ -112,7 +121,7 @@ export default function Testimonial() {
 
               {/* Quote */}
               <p
-                className="text-sm leading-relaxed"
+                className="text-sm leading-relaxed flex-1"
                 style={{ color: '#e5e5e5', fontFamily: 'var(--font-sans)' }}
               >
                 "{r.text}"

@@ -126,7 +126,8 @@ const paymentMethods = ['Transfer Bank', 'QRIS', 'GoPay', 'OVO', 'Kartu Debit/Kr
             {s.unit}
           </span>
         </div>
-        <table class="w-full text-sm" style="font-family: var(--font-sans);">
+        <div class="overflow-x-auto">
+        <table class="w-full text-sm" style="font-family: var(--font-sans); min-width: 420px;">
           <thead>
             <tr style="border-bottom: 1px solid #2a2a2a;">
               <th class="text-left px-6 py-3 font-semibold" style="color: #707072;">Slot</th>
@@ -164,6 +165,7 @@ const paymentMethods = ['Transfer Bank', 'QRIS', 'GoPay', 'OVO', 'Kartu Debit/Kr
             ))}
           </tbody>
         </table>
+        </div>
       </div>
     ))}
 
