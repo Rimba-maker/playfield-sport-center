@@ -119,17 +119,16 @@ export default function Membership() {
                   : 'none',
               }}
             >
-              {plan.popular && (
-                <div
-                  className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest"
-                  style={{ background: plan.color, color: '#fff' }}
-                >
-                  ⭐ Terlaris
-                </div>
-              )}
-
               {/* Tier + Name */}
               <div className="mb-6">
+                {plan.popular && (
+                  <div
+                    className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-3"
+                    style={{ background: plan.color, color: '#fff' }}
+                  >
+                    ⭐ Terlaris
+                  </div>
+                )}
                 <span className="text-2xl">{plan.tier}</span>
                 <h3
                   className="font-bold text-lg text-white mt-2"

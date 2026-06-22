@@ -99,14 +99,14 @@ export default function Testimonial() {
         </motion.div>
 
         {/* Reviews masonry-like grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {reviews.map((r, i) => (
             <motion.div
               key={r.id}
               initial={{ opacity: 0, y: 24 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="rounded-2xl p-6 flex flex-col gap-4"
+              className="rounded-2xl p-6 flex flex-col gap-4 min-w-0 overflow-hidden"
               style={{
                 background: '#181818',
                 border: '1px solid #2a2a2a',
