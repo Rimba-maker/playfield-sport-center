@@ -86,7 +86,7 @@ export default function FasilitasUmum() {
         </motion.div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
           {fasilitas.map((f, i) => (
             <motion.div
               key={f.title}
@@ -95,7 +95,7 @@ export default function FasilitasUmum() {
               initial="hidden"
               animate={isInView ? 'visible' : 'hidden'}
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              className="rounded-2xl p-6 flex flex-col gap-3 group cursor-default"
+              className="rounded-2xl p-4 md:p-6 flex flex-col gap-2 md:gap-3 group cursor-default"
               style={{
                 background: '#181818',
                 border: '1px solid #2a2a2a',
@@ -109,7 +109,7 @@ export default function FasilitasUmum() {
               }}
             >
               <motion.span
-                className="text-3xl"
+                className="text-2xl md:text-3xl"
                 whileHover={{ scale: 1.2 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 15 }}
               >

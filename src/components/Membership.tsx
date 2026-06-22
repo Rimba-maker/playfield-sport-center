@@ -100,7 +100,7 @@ export default function Membership() {
         </motion.div>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-6 items-center">
+        <div className="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:pb-0 md:items-center">
           {plans.map((plan, i) => (
             <motion.div
               key={plan.id}
@@ -108,13 +108,12 @@ export default function Membership() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
               whileHover={{ y: -6, transition: { duration: 0.2 } }}
-              className="relative rounded-2xl p-8 flex flex-col"
+              className={`relative rounded-2xl p-6 md:p-8 flex flex-col flex-shrink-0 snap-start w-[78vw] sm:w-[55vw] md:w-auto ${plan.popular ? 'md:scale-[1.03]' : ''}`}
               style={{
-                background: plan.popular ? '#181818' : '#181818',
+                background: '#181818',
                 border: plan.popular
                   ? `1.5px solid ${plan.color}`
                   : '1px solid #2a2a2a',
-                transform: `scale(${plan.scale})`,
                 boxShadow: plan.popular
                   ? `0 0 40px rgba(59,130,246,0.12), 0 8px 24px rgba(0,0,0,0.4)`
                   : 'none',

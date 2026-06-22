@@ -57,7 +57,7 @@ const socials = [
 >
   <!-- Main footer -->
   <div class="container-main py-16">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-10">
 
       <!-- Brand column -->
       <div class="lg:col-span-2">
@@ -116,30 +116,32 @@ const socials = [
         </div>
       </div>
 
-      <!-- Nav groups -->
-      {navGroups.map((group) => (
-        <div>
-          <p
-            class="text-xs font-bold uppercase tracking-widest mb-4"
-            style="color: #707072; font-family: var(--font-sans);"
-          >
-            {group.title}
-          </p>
-          <ul class="flex flex-col gap-3">
-            {group.links.map((link) => (
-              <li>
-                <a
-                  href={link.href}
-                  class="text-sm transition-colors hover:text-white"
-                  style="color: #b3b3b3; font-family: var(--font-sans);"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+      <!-- Nav groups: 3-col grid on mobile, separate cols on desktop -->
+      <div class="grid grid-cols-3 lg:contents gap-6">
+        {navGroups.map((group) => (
+          <div>
+            <p
+              class="text-xs font-bold uppercase tracking-widest mb-3 md:mb-4"
+              style="color: #707072; font-family: var(--font-sans);"
+            >
+              {group.title}
+            </p>
+            <ul class="flex flex-col gap-2 md:gap-3">
+              {group.links.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="text-xs md:text-sm transition-colors hover:text-white"
+                    style="color: #b3b3b3; font-family: var(--font-sans);"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
   </div>
 
