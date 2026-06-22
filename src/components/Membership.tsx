@@ -20,6 +20,8 @@ const plans = [
       'Prioritas booking 7 hari sebelum',
       'Free 1 jam sewa locker/bulan',
       'Akses lounge & WiFi unlimited',
+      'Notifikasi slot kosong lebih awal',
+      'Member card digital PlayField',
     ],
     waMsg: 'Halo, saya tertarik daftar PlayField Member (Rp 200k/bulan).',
   },
@@ -108,7 +110,7 @@ export default function Membership() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
               whileHover={{ y: -6, transition: { duration: 0.2 } }}
-              className={`relative rounded-2xl p-6 md:p-8 flex flex-col flex-shrink-0 snap-start w-[78vw] sm:w-[55vw] md:w-auto ${plan.popular ? 'md:scale-[1.03]' : ''}`}
+              className="relative rounded-2xl p-6 md:p-8 flex flex-col flex-shrink-0 snap-start w-[78vw] sm:w-[55vw] md:w-auto"
               style={{
                 background: '#181818',
                 border: plan.popular
