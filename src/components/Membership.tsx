@@ -100,7 +100,7 @@ export default function Membership() {
         </motion.div>
 
         {/* Cards */}
-        <div className="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:pb-0 md:items-center">
+        <div className="flex overflow-x-auto gap-4 pt-5 pb-4 snap-x snap-mandatory md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:pt-0 md:pb-0 md:items-center">
           {plans.map((plan, i) => (
             <motion.div
               key={plan.id}
@@ -119,16 +119,17 @@ export default function Membership() {
                   : 'none',
               }}
             >
+              {plan.popular && (
+                <div
+                  className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest whitespace-nowrap"
+                  style={{ background: plan.color, color: '#fff' }}
+                >
+                  ⭐ Terlaris
+                </div>
+              )}
+
               {/* Tier + Name */}
               <div className="mb-6">
-                {plan.popular && (
-                  <div
-                    className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-3"
-                    style={{ background: plan.color, color: '#fff' }}
-                  >
-                    ⭐ Terlaris
-                  </div>
-                )}
                 <span className="text-2xl">{plan.tier}</span>
                 <h3
                   className="font-bold text-lg text-white mt-2"

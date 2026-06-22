@@ -51,7 +51,7 @@ const reviews: Array<{
   },
   {
     id: 5,
-    text: 'Badminton court-nya paling enak di kota ini. Vinyl floor-nya empuk di kaki, nggak pegal walau main 2 jam penuh. Shuttlecock yang dijual di counter juga bagus dan harga wajar. Sudah coba beberapa venue lain di kota ini — PlayField tetap yang terbaik soal kualitas court dan kebersihan.',
+    text: 'Badminton court-nya paling enak di kota ini. Vinyl floor-nya empuk di kaki, nggak pegal walau main 2 jam penuh. Sudah coba beberapa venue lain — PlayField tetap yang terbaik soal kualitas court dan kebersihan.',
     author: 'Pak Doni',
     meta: 'Badminton 4x seminggu · Pro member',
     sport: 'badminton',
@@ -60,7 +60,7 @@ const reviews: Array<{
   },
   {
     id: 6,
-    text: 'Awalnya ragu coba padel karena takut susah, tapi ikut intro session Sabtu pagi langsung ketagihan. Coach-nya sabar banget ngajarin dari nol. Sekarang sudah main 3x seminggu sama keluarga — suami, saya, dan anak remaja kami semua ikut. Ini olahraga keluarga terbaik yang pernah kami coba.',
+    text: 'Awalnya ragu coba padel karena takut susah, tapi ikut intro session Sabtu pagi langsung ketagihan. Coach-nya sabar banget ngajarin dari nol. Sekarang sudah main 3x seminggu sama keluarga.',
     author: 'Ibu Sari',
     meta: 'Elite member · Padel & Tenis',
     sport: 'padel',
@@ -68,6 +68,38 @@ const reviews: Array<{
     Avatar: IconBallTennis,
   },
 ];
+
+function ReviewCard({ r }: { r: typeof reviews[number] }) {
+  return (
+    <div
+      className="w-72 md:w-80 flex-shrink-0 rounded-2xl p-6 flex flex-col gap-4"
+      style={{ background: '#181818', border: '1px solid #2a2a2a' }}
+    >
+      <div className="flex gap-0.5">
+        {Array.from({ length: 5 }).map((_, s) => (
+          <IconStar key={s} size={14} fill={r.color} stroke={r.color} strokeWidth={1} />
+        ))}
+      </div>
+      <p className="text-sm leading-relaxed flex-1" style={{ color: '#e5e5e5', fontFamily: 'var(--font-sans)' }}>
+        "{r.text}"
+      </p>
+      <div className="flex items-center gap-3 pt-2" style={{ borderTop: '1px solid #2a2a2a' }}>
+        <div
+          className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
+          style={{ background: `rgba(${hexToRgb(r.color)}, 0.15)`, color: r.color }}
+        >
+          <r.Avatar size={18} stroke={1.5} />
+        </div>
+        <div>
+          <p className="text-sm font-semibold text-white" style={{ fontFamily: 'var(--font-sans)' }}>
+            {r.author}
+          </p>
+          <p className="text-xs" style={{ color: '#707072' }}>{r.meta}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Testimonial() {
   const ref = useRef<HTMLElement>(null);
@@ -77,11 +109,10 @@ export default function Testimonial() {
     <section
       id="testimoni"
       ref={ref}
-      className="section-padding"
+      className="section-padding overflow-hidden"
       style={{ background: '#121212' }}
     >
       <div className="container-main">
-        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -97,57 +128,18 @@ export default function Testimonial() {
             <span style={{ color: '#b3b3b3' }}>KOMUNITAS.</span>
           </h2>
         </motion.div>
+      </div>
 
-        {/* Reviews masonry-like grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {reviews.map((r, i) => (
-            <motion.div
-              key={r.id}
-              initial={{ opacity: 0, y: 24 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="rounded-2xl p-6 flex flex-col gap-4 min-w-0 overflow-hidden"
-              style={{
-                background: '#181818',
-                border: '1px solid #2a2a2a',
-              }}
-            >
-              {/* Stars */}
-              <div className="flex gap-0.5">
-                {Array.from({ length: 5 }).map((_, s) => (
-                  <IconStar key={s} size={14} weight="fill" style={{ color: r.color }} fill={r.color} stroke={r.color} strokeWidth={1} />
-                ))}
-              </div>
-
-              {/* Quote */}
-              <p
-                className="text-sm leading-relaxed flex-1"
-                style={{ color: '#e5e5e5', fontFamily: 'var(--font-sans)' }}
-              >
-                "{r.text}"
-              </p>
-
-              {/* Author */}
-              <div className="flex items-center gap-3 pt-2" style={{ borderTop: '1px solid #2a2a2a' }}>
-                <div
-                  className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{ background: `rgba(${hexToRgb(r.color)}, 0.15)`, color: r.color }}
-                >
-                  <r.Avatar size={18} stroke={1.5} />
-                </div>
-                <div>
-                  <p
-                    className="text-sm font-semibold text-white"
-                    style={{ fontFamily: 'var(--font-sans)' }}
-                  >
-                    {r.author}
-                  </p>
-                  <p className="text-xs" style={{ color: '#707072' }}>
-                    {r.meta}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
+      {/* Marquee — full-bleed, outside container-main */}
+      <div
+        style={{
+          maskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)',
+          WebkitMaskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)',
+        }}
+      >
+        <div className="marquee-track flex gap-4" style={{ width: 'max-content' }}>
+          {[...reviews, ...reviews].map((r, i) => (
+            <ReviewCard key={i} r={r} />
           ))}
         </div>
       </div>
